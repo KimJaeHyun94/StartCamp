@@ -1,0 +1,16 @@
+현재 연결된 저장소를 확인합니다.
+$ git remote -v
+origin  https://github.com/dololak/gitStudy.git (fetch)
+origin  https://github.com/dololak/gitStudy.git (push)
+
+
+origin 원격 저장소와의 연결을 제거합니다.
+$ git remote remove origin
+
+
+원격 저장소와의 연결만 제거한 것이므로 사용중이던 저장소와 원격 저장소 자체에는 변화가 없습니다. (파일이 수정된다거나 삭제되지 않습니다.)
+$ ls
+Hello.java  README.md
+
+디렉토리 삭제
+rmdir 디렉토리명
