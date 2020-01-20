@@ -1,0 +1,222 @@
+#pip install Flask
+#윗줄은 터미널에서 실행
+
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def index():
+    return "Hello World!!"
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+#---------------------------------------
+'''
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def index():
+    return "Hello World!!"
+
+@app.route('/user')
+def get_user():
+    return "Hello User!!"
+
+@app.route('/post')
+def get_post():
+    return "Hello Post!!"
+
+@app.route('/user/list')
+def get_user_list():
+    return "Hello User List!!"
+
+if __name__ == '__main__':
+    app.run(debug=True)'''
+#---------------------------------------
+'''from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/user', methods=['GET'])
+def get_user():
+    return "GET /user called!!"
+
+@app.route('/user', methods=['POST'])
+def post_user():
+    return "POST /user called!!"
+
+@app.route('/user', methods=['PUT'])
+def put_user():
+    return "PUT /user called!!"
+
+@app.route('/user', methods=['DELETE'])
+def delete_user():
+    return "DELETE /user called!!"
+
+if __name__ == '__main__':
+    app.run(debug=True)'''
+#---------------------------------------
+'''
+from flask import Flask, request
+
+app = Flask(__name__)
+
+
+@app.route('/query')
+def index():
+    args = request.args
+    id = args.get('id')
+    print(id)
+
+    return "Query String!!"
+
+
+if __name__ == '__main__':
+    app.run(debug=True)'''
+#---------------------------------------
+'''
+@app.route('/query')
+def index():
+    args = request.args
+
+    id = args.get('id')
+    date = args.get('date')
+    print(id)
+    print(date)
+
+    return "Query String!!"
+'''
+#---------------------------------------
+'''
+from flask import Flask, request
+app = Flask(__name__)
+
+@app.route('/path/<param1>/<param2>')
+def path_param(param1, param2):
+    print(param1)
+    print(param2)
+
+    return "Path Param!!"
+
+
+if __name__ == '__main__':
+    app.run(debug=True)'''
+#---------------------------------------
+'''
+from flask import Flask, request
+app = Flask(__name__)
+
+
+@app.route('/body', methods=['POST'])
+def request_body():
+    print(request.json)
+
+    body = request.json
+    id = body['id']
+    name = body['name']
+
+    print(id)
+    print(name)
+
+    return "Request Body!!"
+
+if __name__ == '__main__':
+    app.run(debug=True)'''
+#---------------------------------------
+'''
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route('/json/object')
+def get_json_object():
+    response = {"id": 1}
+
+    return response
+
+
+if __name__ == '__main__':
+    app.run(debug=True)'''
+
+#---------------------------------------
+'''
+@app.route('/json/list')
+def get_json_list():
+    list = [1, 2, 3, 4, 5]
+    response = {"list": list}
+
+    return response'''
+#---------------------------------------
+'''
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/sensor/data/list')
+#sensor/data/list
+def get_sensor_data_list():
+    data1 = {"device_id": "LED01", "data": "on", "datetime": "20190731 00:12:47"}
+    data2 = {"device_id": "LED02", "data": "off", "datetime": "20190731 00:58:01"}
+
+    list = [data1, data2]
+    response = {"data_list": list}
+
+    return response
+
+if __name__ == '__main__':
+    app.run(debug=True)
+'''
+#---------------------------------------
+'''
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def index():
+    return 'Hello World!'
+
+
+@app.route('/webhook')
+def hello():
+    return 'Hello this is webhook!!!'
+
+
+# run the app
+
+if __name__ == '__main__':
+    app.run()
+'''
+#---------------------------------------
+'''from flask import Flask, make_response, request, jsonify
+
+
+@app.route('/webhook', methods=['GET', 'POST'])
+def webhook():
+    return make_response(jsonify(results()))
+
+def results():
+    req = request.get_json(force=True)
+    print(req)
+    print('---------------------------------------------')
+    queryText = req.get('queryResult').get('queryText')
+    print(queryText)
+
+response = \
+    {
+        'fulfillmentMessages': [ {
+        'text': { 'text':
+            ["This is a response from webhook."]
+            }
+        }]
+    }
+
+return response'''
